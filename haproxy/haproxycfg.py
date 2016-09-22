@@ -194,8 +194,8 @@ class Haproxy(object):
                       "group haproxy",
                       "daemon",
                       "stats socket /var/run/haproxy.stats level admin"]
-
-        statements.extend(ConfigHelper.config_ssl_bind_options(SSL_BIND_OPTIONS))
+        if not SSL_BIND_OPTIONS:
+            statements.extend(ConfigHelper.config_ssl_bind_options(SSL_BIND_OPTIONS))
         statements.extend(ConfigHelper.config_ssl_bind_ciphers(SSL_BIND_CIPHERS))
         statements.extend(ConfigHelper.config_extra_settings(EXTRA_GLOBAL_SETTINGS))
         cfg["global"] = statements
