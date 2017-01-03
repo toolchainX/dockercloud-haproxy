@@ -3,6 +3,7 @@ MAINTAINER Feng Honglin <hfeng@tutum.co>
 
 COPY . /haproxy-src
 
+RUN printf "http://mirrors.aliyun.com/alpine/edge/main\nhttp://mirrors.aliyun.com/alpine/edge/community" > /etc/apk/repositories
 RUN apk update && \
     apk --no-cache add tini haproxy py2-pip py-pip build-base python-dev ca-certificates && \
     cp /haproxy-src/reload.sh /reload.sh && \

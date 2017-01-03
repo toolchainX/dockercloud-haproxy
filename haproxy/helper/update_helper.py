@@ -1,6 +1,7 @@
 import logging
 import subprocess
 import thread
+import time
 
 from haproxy.config import HAPROXY_RUN_COMMAND
 
@@ -20,6 +21,7 @@ def run_reload(old_process):
         # Reload haproxy
         logger.info("Reloading HAProxy")
         new_process = subprocess.Popen(HAPROXY_RUN_COMMAND + ["-sf", str(old_process.pid)])
+        time.sleep(0.1)
         thread.start_new_thread(wait_pid, (old_process,))
         logger.info("HAProxy has been reloaded(PID: %s)", str(new_process.pid))
     else:
